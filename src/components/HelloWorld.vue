@@ -123,7 +123,7 @@
           <div>2. 添加中间按钮
             <span style="font-size: 14px;color: red;">（名称或枚举推荐使用add，invalid，valid，export，search，clear有预设样式， 自定义列按钮必须为customColumns）</span>
           </div>
-          <el-form ref="formFilter" :model="formFilter" label-width="120px">
+          <el-form ref="formFilter" :model="formFilter" label-width="150px">
             <el-form-item label="名称或枚举">
               <el-input v-model="formFilter.title" placeholder="请输入按钮名称或者替代枚举"></el-input>
             </el-form-item>
@@ -252,10 +252,13 @@ export default {
         label: '日期选择器'
       },{
         value: 4,
-        label: '单选框'
+        label: '数字输入框'
       },{
         value: 5,
-        label: '级联选择'
+        label: '单选框'
+      }, {
+        value: 6,
+        label: '级联选择器'
       }],
       rows: [
         {
@@ -311,12 +314,12 @@ export default {
       }).then(({data}) => {
         if (data) {
           const blob = new Blob([data], {type: "text/plain;charset=utf-8"})
-          this.FileSaver.saveAs(blob, 'list.vue')
+          this.FileSaver.saveAs(blob, this.form.fileName || 'list.vue')
         }
       }).finally(() => {
         setTimeout(() => {
           this.loading = false
-        }, 300)
+        }, 200)
       })
     },
     onAddSearchClick(form) {
