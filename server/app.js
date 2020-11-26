@@ -1,19 +1,24 @@
 const Koa = require('koa');
+const http = require('http');
+const https = require('https');
 const app = new Koa();
 
-app.listen(7200, () => {
-  console.log('[Koa] Server is starting at port 7200!');
-});
+// app.listen(7211, () => {
+//   console.log('[Koa] Server is starting at port 7211!');
+// });
+// http.createServer(app.callback()).listen(3000);
 
 app.use(async ctx => {
-  let postData = await parsePostData(ctx)
-  // for (let i in postData) {
-  //   console.log(i)
-  // }
   const url = ctx.request.url
-  // if (url === '/getPCPage') {
+  if (url !== '/getPCPage') {
+    ctx.status = 404
+    return;
+  }
+  const postData = await parsePostData(ctx)
+
+
   const { rows, basicInfo } = postData
-  // }
+
   const searchTypeEnum = {
     1: 'input',
     2: 'select',
@@ -253,6 +258,11 @@ export default {
 </style>` 
 })
 
+app.on("error",(err, ctx)=>{//捕获异常记录错误日志
+  console.log(new Date(),":",err);
+});
+http.createServer(app.callback()).listen(7211);
+
 // 解析上下文里node原生请求的POST参数
 function parsePostData(ctx) {
   return new Promise((resolve, reject) => {
@@ -262,8 +272,12 @@ function parsePostData(ctx) {
         postData += data
       })
       ctx.req.addListener('end', function() {
+        try {
         // let parseData = parseQueryStr(postdata)
-        resolve(JSON.parse(postData));
+          resolve(JSON.parse(postData));
+        } catch(e) {
+          reject(e)
+        }
       })
     } catch (err) {
       reject(err)

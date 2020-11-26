@@ -15,7 +15,7 @@ module.exports = {
     //设置代理
     proxy: {
       '/api': {
-        target: 'http://localhost:7200', //mit-接口
+        target: 'http://localhost:7211', //mit-接口
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
