@@ -10,7 +10,7 @@ const app = new Koa();
 
 app.use(async ctx => {
   const url = ctx.request.url
-  if (url !== '/getPCPage') {
+  if (url !== '/getPCPage' || url !== '/api/getPCPage') {
     ctx.status = 404
     return;
   }
