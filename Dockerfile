@@ -1,4 +1,4 @@
-FROM node:14-alpine as build
+FROM node:16-alpine as build
 # 设置 maintai
 LABEL maintainer "495060071@qq.com"
 # 当前目录代码都拷贝到app下
