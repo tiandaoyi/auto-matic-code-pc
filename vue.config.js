@@ -10,8 +10,8 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: false,
   assetsDir: 'static',
-  // publicPath: './',
-  publicPath: '/auto/',
+  publicPath: './',
+  // publicPath: '/auto/',
   devServer: {
     //设置代理
     proxy: {
