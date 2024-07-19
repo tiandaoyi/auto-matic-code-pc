@@ -10,7 +10,7 @@ WORKDIR /app
 RUN npm config set registry https://registry.npmmirror.com/
 
 # 安装pnpm
-RUN npm install -g pnpm@8.15.9
+RUN npm install -g pnpm@7.33.7
 RUN pnpm config set registry https://registry.npmmirror.com/
 RUN pnpm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
 
